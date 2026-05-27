@@ -1,0 +1,22 @@
+[build]
+  command = "pnpm --filter @workspace/mercadolivre-mobile run build"
+  publish = "artifacts/mercadolivre-mobile/dist/public"
+  functions = "netlify/functions"
+
+[build.environment]
+  BASE_PATH = "/"
+  PORT = "3000"
+  NODE_VERSION = "20"
+
+# Rota da API PIX → Netlify Function
+[[redirects]]
+  from = "/api/pix/create"
+  to = "/.netlify/functions/pix-create"
+  status = 200
+  force = true
+
+# SPA — todas as rotas caem no index.html
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

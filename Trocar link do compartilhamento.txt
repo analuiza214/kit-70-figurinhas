@@ -1,0 +1,14 @@
+Instruções pra mudar o link da página:
+
+Fica no arquivo:
+
+artifacts/mercadolivre-mobile/src/pages/product-page.tsx
+
+Nas primeiras linhas do arquivo (linhas 12–15):
+
+// ── Link de compartilhamento — edite aqui para mudar facilmente ──
+const SHARE_URL = "https://meusite.com.br/produto";
+const SHARE_TITLE = "Kit 70 Figurinhas Do Álbum Copa Do Mundo 2026 por R$ 27,90!";
+// ────────────────────────────────────────────────────────────────
+
+Basta abrir esse arquivo, trocar o valor entre aspas de SHARE_URL pelo link que quiser, salvar e fazer o push. Não precisa mexer em mais nada.
