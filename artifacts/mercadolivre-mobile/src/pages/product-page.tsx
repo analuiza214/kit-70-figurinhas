@@ -7,7 +7,7 @@ import reviewPhoto1 from "@assets/WhatsApp_Image_2026-05-24_at_14.58.52_17796454
 import reviewPhoto2 from "@assets/WhatsApp_Image_2026-05-24_at_14.58.52_(1)_1779645477889.jpeg";
 
 // ── Link de compartilhamento — edite aqui para mudar facilmente ──
-const SHARE_URL = "https://kit-70-figurinhas-mercadolivre.netlify.app/";
+const SHARE_URL = "https://kit70-figurinhas-mercadolivre.netlify.app/";
 const SHARE_TITLE = "Kit 70 Figurinhas Do Álbum Copa Do Mundo 2026 por R$ 27,90!";
 // ────────────────────────────────────────────────────────────────
 
@@ -767,13 +767,13 @@ export default function ProductPage() {
         name: 'Álbum Copa Do Mundo 2026 Capa Dura + Figurinhas Panini',
         price: 'R$ 39,90',
         img: '/images/sugg-1.webp',
-        link: 'https://album-mercadolivre.netlify.app/',
+        link: 'https://kit140-figurinhas-mercadolivre.netlify.app/',
       },
       {
         name: 'Kit 140 Figurinhas Do Álbum Copa Do Mundo 2026 - 20 Envelopes',
         price: 'R$ 49,90',
         img: '/images/sugg-2.webp',
-        link: 'https://kit-140-figurinhas-mercadolivre.netlify.app/',
+        link: 'https://kit140-figurinhas-mercadolivre.netlify.app/',
       },
       {
         name: 'Kit 252 Figurinhas Do Álbum Copa Do Mundo 2026 - 36 Pacotes',
