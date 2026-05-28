@@ -209,6 +209,10 @@ export default function CepPage() {
   const [buyerCpf, setBuyerCpf] = useState("");
   const [buyerError, setBuyerError] = useState("");
 
+  // Cart quantity / total (read from product page)
+  const [cartQty, setCartQty] = useState(1);
+  const [cartTotal, setCartTotal] = useState(27.90);
+
   // Shipping
   const [shipping, setShipping] = useState(0);
 
@@ -293,6 +297,18 @@ export default function CepPage() {
   // Scroll to top on mount + restore data from previous session or product page
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "instant" });
+
+    // Read cart quantity / total saved by product page
+    const cartRaw = sessionStorage.getItem("topmix_cart");
+    if (cartRaw) {
+      try {
+        const cart = JSON.parse(cartRaw);
+        if (cart.qty && cart.qty > 0) {
+          setCartQty(cart.qty);
+          setCartTotal(cart.totalPrice ?? 27.90 * cart.qty);
+        }
+      } catch { /* ignored */ }
+    }
 
     // Priority 1: restore from checkoutData (user came back from PIX page)
     const checkoutRaw = sessionStorage.getItem("checkoutData");
@@ -542,8 +558,8 @@ export default function CepPage() {
     { label: `Chegará entre ${DAYS_PT[day2.getDay()]} e ${DAYS_PT[day3.getDay()]}`, price: "Frete grátis" },
   ];
 
-  const productPrice = 27.9;
-  const originalPrice = 87.0;
+  const productPrice = cartTotal;
+  const originalPrice = 87.0 * cartQty;
   const discount = originalPrice - productPrice;
   const installments = calcInstallments(productPrice);
 

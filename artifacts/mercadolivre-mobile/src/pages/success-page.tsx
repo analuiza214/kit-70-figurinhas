@@ -41,6 +41,17 @@ export default function SuccessPage() {
   const [pixData, setPixData] = useState<PixData | null>(null);
   const [pixLoading, setPixLoading] = useState(false);
   const [pixError, setPixError] = useState<string | null>(null);
+  const [orderAmount, setOrderAmount] = useState(27.90);
+
+  useEffect(() => {
+    const raw = sessionStorage.getItem("checkoutData");
+    if (raw) {
+      try {
+        const cd = JSON.parse(raw);
+        if (cd.amount && cd.amount > 0) setOrderAmount(cd.amount);
+      } catch { /* ignored */ }
+    }
+  }, []);
 
   useEffect(() => {
     const base = payment === "card" ? 4000 : 3000;
@@ -283,7 +294,7 @@ export default function SuccessPage() {
           <div className="bg-white rounded-2xl shadow-sm px-5 py-6 flex flex-col gap-4">
             <p className="text-sm text-gray-600 text-center leading-relaxed">
               Confirme se já autorizou o pagamento de{" "}
-              <strong>R$ 27,90</strong> para finalizar a compra.
+              <strong>R$ {orderAmount.toFixed(2).replace(".", ",")}</strong> para finalizar a compra.
             </p>
 
             <button
@@ -342,7 +353,7 @@ export default function SuccessPage() {
 
           <p className="text-sm text-gray-500 mb-1">Falta pouco!</p>
           <h1 className="text-xl font-bold text-gray-900 leading-snug">
-            Pague R$ 27,90 via Pix para concluir sua compra
+            Pague R$ {orderAmount.toFixed(2).replace(".", ",")} via Pix para concluir sua compra
           </h1>
         </div>
       </div>

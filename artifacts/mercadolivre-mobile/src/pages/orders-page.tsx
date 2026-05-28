@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { ArrowLeft, ChevronRight, Headphones, Copy } from "lucide-react";
 
@@ -6,6 +7,17 @@ const TODAY = "25 de mai";
 
 export default function OrdersPage() {
   const [, navigate] = useLocation();
+  const [orderAmount, setOrderAmount] = useState(27.90);
+
+  useEffect(() => {
+    const raw = sessionStorage.getItem("checkoutData");
+    if (raw) {
+      try {
+        const cd = JSON.parse(raw);
+        if (cd.amount && cd.amount > 0) setOrderAmount(cd.amount);
+      } catch { /* ignored */ }
+    }
+  }, []);
 
   function handleCopyOrder() {
     try { navigator.clipboard.writeText(ORDER_ID); } catch { /* ignored */ }
@@ -36,7 +48,7 @@ export default function OrdersPage() {
         {/* Title + thumbnail */}
         <div className="flex items-start justify-between gap-3 mb-4">
           <h1 className="text-xl font-bold text-gray-900 leading-snug flex-1">
-            Pague R$ 27,90 via Pix
+            Pague R$ {orderAmount.toFixed(2).replace(".", ",")} via Pix
           </h1>
           <img
             src="/images/figurinhas-copa.png"
@@ -109,7 +121,7 @@ export default function OrdersPage() {
             </svg>
           </div>
           <div className="flex-1 text-left">
-            <p className="text-sm font-semibold text-gray-900">R$ 27,90</p>
+            <p className="text-sm font-semibold text-gray-900">R$ {orderAmount.toFixed(2).replace(".", ",")}</p>
             <p className="text-xs text-gray-500">Pix · {TODAY}</p>
           </div>
           <ChevronRight className="w-4 h-4 text-gray-400 shrink-0" />
